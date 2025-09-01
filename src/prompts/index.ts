@@ -1,5 +1,8 @@
-import { readFileSync } from 'fs'
-import { join } from 'path'
+import { getPrompt as getCustomOutputPrompt } from './custom-output.prompt'
+import { getPrompt as getMindMapPrompt } from './mind-map.prompt'
+import { getPrompt as getSocialPostPrompt } from './social-post.prompt'
+import { getPrompt as getSummaryPrompt } from './summary.prompt'
+import { getPrompt as getTopicsPrompt } from './topics.prompt'
 
 export const AVAILABLE_PROMPTS = {
   SUMMARY: 'summary',
@@ -13,21 +16,36 @@ export type PromptName =
   (typeof AVAILABLE_PROMPTS)[keyof typeof AVAILABLE_PROMPTS]
 
 export class PromptLoader {
-  private static readonly PROMPTS_DIR = join(__dirname)
-
   static loadPrompt(
     promptName: PromptName,
     variables: Record<string, string> = {}
   ): string {
-    const promptPath = join(this.PROMPTS_DIR, `${promptName}.prompt`)
-
     try {
-      let prompt = readFileSync(promptPath, 'utf-8')
+      let prompt: string
 
-      // Replace template variables
-      Object.entries(variables).forEach(([key, value]) => {
-        prompt = prompt.replace(new RegExp(`{{${key}}}`, 'g'), value)
-      })
+      switch (promptName) {
+        case AVAILABLE_PROMPTS.SUMMARY:
+          prompt = getSummaryPrompt(variables.transcript, variables.language)
+          break
+        case AVAILABLE_PROMPTS.TOPICS:
+          prompt = getTopicsPrompt(variables.transcript, variables.language)
+          break
+        case AVAILABLE_PROMPTS.MIND_MAP:
+          prompt = getMindMapPrompt(variables.transcript, variables.language)
+          break
+        case AVAILABLE_PROMPTS.SOCIAL_POST:
+          prompt = getSocialPostPrompt(variables.transcript, variables.language)
+          break
+        case AVAILABLE_PROMPTS.CUSTOM_OUTPUT:
+          prompt = getCustomOutputPrompt(
+            variables.transcript,
+            variables.language,
+            variables.customPrompt
+          )
+          break
+        default:
+          throw new Error(`Unknown prompt name: ${promptName}`)
+      }
 
       return prompt
     } catch (error) {

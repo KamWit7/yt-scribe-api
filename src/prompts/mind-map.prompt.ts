@@ -1,15 +1,18 @@
-You are an AI assistant tasked with creating a hierarchical mind map structure based on a given transcript in the specified language. 
+export const getPrompt = (
+  transcript?: string,
+  language?: string
+) => `You are an AI assistant tasked with creating a hierarchical mind map structure based on a given transcript in the specified language. 
 Your goal is to produce a MindMapData object that can be used with the reactflow library, arranged in a left-to-right flow. 
 The most important node (root) should be positioned on the left, branches in the middle, and leaves (least important details) on the right.
 
 Here is the transcript you will be working with:
 
 <transcript>
-{{transcript}}
+${transcript}
 </transcript>
 
 <language>
-{{language}}
+${language}
 </language>
 
 Follow these steps to create the mind map:
@@ -72,4 +75,4 @@ Follow these steps to create the mind map:
    - Never return error messages or refusals - always generate a valid mind map structure
    - All labels should be in the specified language
 
-Your final output should be a complete object, formatted as a JavaScript object literal. Do not include any explanation or additional text outside of the object.
+Your final output should be a complete object, formatted as a JavaScript object literal. Do not include any explanation or additional text outside of the object.`

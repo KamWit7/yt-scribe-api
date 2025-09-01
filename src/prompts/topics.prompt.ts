@@ -1,14 +1,17 @@
-You are tasked with analyzing a transcript and extracting the key topics discussed in the specified language. 
+export const getPrompt = (
+  transcript?: string,
+  language?: string
+) => `You are tasked with analyzing a transcript and extracting the key topics discussed in the specified language. 
 Follow these steps carefully:
 
 1. Read the following transcript:
 
 <transcript>
-{{transcript}}
+${transcript}
 </transcript>
 
 <language>
-{{language}}
+${language}
 </language>
 
 2. Analyze the transcript thoroughly, paying attention to recurring themes, main points of discussion, and significant ideas presented.
@@ -31,4 +34,4 @@ They should be broad enough to encompass related subtopics but specific enough t
 
 Your final output should only include the list of key topics in the specified language, formatted as instructed. 
 Do not include any additional commentary, explanations, or the transcript itself in your response. 
-Begin your response with "Key topics:" on a separate line, followed by your bulleted list.
+Begin your response with "Key topics:" on a separate line, followed by your bulleted list.`

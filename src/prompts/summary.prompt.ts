@@ -1,12 +1,15 @@
-Your task is to analyze the following transcript and create a concise summary in the specified language. 
+export const getPrompt = (
+  transcript?: string,
+  language?: string
+) => `Your task is to analyze the following transcript and create a concise summary in the specified language. 
 Here is the transcript:
 
 <transcript>
-{{transcript}}
+${transcript}
 </transcript>
 
 <language>
-{{language}}
+${language}
 </language>
 
 Carefully read the above transcript and create a concise summary in the specified language that:
@@ -22,4 +25,4 @@ When creating the summary, focus on:
 * Key conclusions or outcomes (if present)
 
 Your final summary should be concise yet informative, capturing the essence of the original transcript.
-Your response should contain only this summary, without any additional comments or explanations.
+Your response should contain only this summary, without any additional comments or explanations.`

@@ -1,11 +1,14 @@
-Here is the transcript to analyze:
+export const getPrompt = (
+  transcript?: string,
+  language?: string
+) => `Here is the transcript to analyze:
 
 <transcript>
-{{transcript}}
+${transcript}
 </transcript>
 
 <language>
-{{language}}
+${language}
 </language>
 
 Carefully read and analyze the transcript to identify the most interesting, educational, or discussion-worthy topic. Choose ONLY ONE main topic to focus on.
@@ -27,4 +30,4 @@ Present your final social media post in the following format:
 
 [Relevant hashtags]
 
-Do not include any additional commentary or explanations outside of these tags.
+Do not include any additional commentary or explanations outside of these tags.`

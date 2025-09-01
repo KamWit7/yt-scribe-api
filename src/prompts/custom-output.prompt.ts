@@ -1,14 +1,18 @@
-You are an AI assistant tasked with analyzing a transcript and answering a custom prompt based on that analysis in the specified language. 
+export const getPrompt = (
+  transcript?: string,
+  language?: string,
+  customPrompt?: string
+) => `You are an AI assistant tasked with analyzing a transcript and answering a custom prompt based on that analysis in the specified language. 
 Follow these instructions carefully:
 
 1. First, read and analyze the following transcript:
 
 <transcript>
-{{transcript}}
+${transcript}
 </transcript>
 
 <language>
-{{language}}
+${language}
 </language>
 
 2. As you analyze the transcript, pay attention to:
@@ -23,7 +27,7 @@ Your task is to answer this prompt based on your analysis of the transcript.
 4. Here is the user's custom prompt:
 
 <custom_prompt>
-{{customPrompt}}
+${customPrompt}
 </custom_prompt>
 
 5. To answer the custom prompt:
@@ -39,4 +43,4 @@ Your task is to answer this prompt based on your analysis of the transcript.
    - If quoting from the transcript, use quotation marks and indicate the speaker
 
 7. Your final output should only include the summary and answer to the custom prompt in the specified language. 
-Do not include any meta-commentary or explain your thought process.
+Do not include any meta-commentary or explain your thought process.`
